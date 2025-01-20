@@ -39,7 +39,8 @@ public class User implements UserDetails {
     private LocalDate createDate;
     @ManyToOne(cascade = CascadeType.ALL)
     private UserRole userRole;
-
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user")
+    private List<UserBook> userBook = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

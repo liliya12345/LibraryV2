@@ -21,7 +21,7 @@ public class Author {
     @Column
     private String firstName;
     @Column
-    private String LastName;
+    private String lastName;
     @ManyToMany
     private List<Book> book;
 

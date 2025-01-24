@@ -1,7 +1,5 @@
 package org.libraryv2.model;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +11,7 @@ import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -37,16 +33,16 @@ public class User implements UserDetails {
     private LocalDate birthday;
     @Column (name="create_date")
     private LocalDate createDate;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private UserRole userRole;
+    @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<UserRole> userRoles = new HashSet<>();
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user")
     private List<UserBook> userBook = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<UserRole> userRoleList= new ArrayList<>();
-        userRoleList.add(userRole);
-        return userRoleList ;
+        return userRoles ;
     }
 
     @Override

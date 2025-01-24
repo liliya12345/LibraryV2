@@ -33,5 +33,7 @@ public class Book {
     private Category category;
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "book")
     private List<UserBook> usersBook = new ArrayList<>();
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "book")
+    private List<Image> images = new ArrayList<>();
 
 }

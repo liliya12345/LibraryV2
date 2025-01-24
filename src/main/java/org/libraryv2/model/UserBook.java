@@ -26,6 +26,8 @@ public class UserBook {
     private LocalDate dateOfLoan;
     @Column (name="date_of_return")
     private LocalDate dateOfReturn;
+    @Column(name="returned")
+    private boolean returned;
 
 
 }

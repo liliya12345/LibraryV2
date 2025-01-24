@@ -12,8 +12,11 @@ Application använder Spring Boot Security att hantera inloggning-registration.
 Uppgifterna lagras i en enkel databas MySql med Docker-compose.
 Projktet använder Hibarnate ORM för att hantera SQL requester. 
 
-## Att strarta applicationen
+## Att starta applicationen
 För att köra applicationen behövs installeras IntellijIdea Ultimate Edition, Docker.
+Man starta services i  docker-compose.yml fil.
+Database  library.sql finns i folder sql i resources.
 
-När projektet oppnas, i projektverktygsfönstret  leta upp källan | main | java | LibraryV2Application. java-filen och öppna den i editorn/ IntelliJIdea. 
+När projektet oppnas, i projektverktygsfönstret  leta upp källan | main | java | LibraryV2Application. java-filen och öppna den i editorn/ IntelliJIdea.
+applications körs på port http://localhost:8083/
 

@@ -9,6 +9,118 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+        .wrapper {
+            max-width: 700px;
+            width: 100%;
+            backdrop-filter: blur(5px);
+            border-radius: 5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .wrapper .title {
+            height: 120px;
+            background: #16a085;
+            border-radius: 5px 5px 0 0;
+            color: #fff;
+            font-size: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrapper form {
+            padding: 25px 35px;
+        }
+
+        .wrapper form .row {
+            height: 60px;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .wrapper form .row input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            padding-left: 70px;
+            border-radius: 5px;
+            border: 1px solid lightgrey;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        form .row input:focus {
+            border-color: #16a085;
+        }
+
+        form .row input::placeholder {
+            color: #999;
+        }
+
+        .wrapper form .row i {
+            position: absolute;
+            width: 55px;
+            height: 100%;
+            color: #fff;
+            font-size: 22px;
+            background: #16a085;
+            border: 1px solid #16a085;
+            border-radius: 5px 0 0 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrapper form .pass {
+            margin-top: 12px;
+        }
+
+        .wrapper form .pass a {
+            color: #16a085;
+            font-size: 17px;
+            text-decoration: none;
+        }
+
+        .wrapper form .pass a:hover {
+            text-decoration: underline;
+        }
+
+        .wrapper form .button input {
+            margin-top: 20px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 500;
+            padding-left: 0px;
+            background: #16a085;
+            border: 1px solid #16a085;
+            cursor: pointer;
+        }
+
+        form .button input:hover {
+            background: #12876f;
+        }
+
+        .wrapper form .signup-link {
+            text-align: center;
+            margin-top: 45px;
+            font-size: 17px;
+        }
+
+        .wrapper form .signup-link a {
+            color: #16a085;
+            text-decoration: none;
+        }
+
+        form .signup-link a:hover {
+            text-decoration: underline;
+        }
+
         .w3-sidebar a {
             font-family: "Roboto", sans-serif
         }
@@ -76,11 +188,12 @@
             background-color: #eee; /* Add a hover effect to all links, except for headers */
         }
 
-        .form-control:focus{
-            #myUL{
+        .form-control:focus {
+            #myUL {
                 visibility: visible;
             }
         }
+
         .demo-container textarea:focus,
         .demo-container input[type="search"]:focus,
         .demo-container input[type="submit"]:focus,
@@ -89,11 +202,13 @@
             border-color: rgba(208, 212, 218, 0.9);
             box-shadow: none !important;
             outline: 0 none !important;
-            #myUL{
+
+            #myUL {
                 visibility: visible;
             }
         }
-        .w3-button{
+
+        .w3-button {
             margin-top: -3px;
         }
 
@@ -126,7 +241,6 @@
         body, h1, h2, h3, h4, h5, h6, .w3-wide {
             font-family: "Montserrat", sans-serif;
         }
-
 
 
     </style>
@@ -174,8 +288,56 @@
     <header class="w3-container w3-xlarge">
         <p class="w3-left">Books</p>
         <a href="/login" class="fa fa-user w3-right w3-padding-large"></a>
-    </header>
 
+    </header>
+    <#--//Login form-->
+<#--    <div class=" w3-modal"   id="id01">-->
+<#--&lt;#&ndash;        <div class="w3-modal-content">&ndash;&gt;-->
+<#--            <div class="wrapper">-->
+<#--                <div class="title"><span>Login Form</span></div>-->
+<#--                <span onclick="document.getElementById('id01').style.display='none'"-->
+<#--                      class="w3-button w3-display-topright">&times;</span>-->
+<#--                <form action="/login" method="post">-->
+<#--                    <div class="row">-->
+<#--                        <span onclick="document.getElementById('id01').style.display='none'"-->
+<#--                              class="w3-button w3-display-topright">&times;</span>-->
+<#--                        <i class="fas fa-user"></i>-->
+<#--                        <input type="text" placeholder="name" name="username" required/>-->
+<#--                    </div>-->
+<#--                    <div class="row">-->
+<#--                        <i class="fas fa-lock"></i>-->
+<#--                        <input type="password" placeholder="password" name="password" required/>-->
+<#--                    </div>-->
+<#--                    <div class="pass"><a href="#">Forgot password?</a></div>-->
+<#--                    <div class="row button">-->
+<#--                        <input type="submit" value="Login"/>-->
+<#--                    </div>-->
+<#--                    <div class="signup-link">Not a member? <a href="/registration">Signup now</a></div>-->
+<#--                </form>-->
+<#--&lt;#&ndash;            </div>&ndash;&gt;-->
+
+<#--            </div>-->
+<#--    </div>-->
+    <#--    <div id="id01" class="w3-modal">-->
+    <#--        <div class="w3-modal-content">-->
+
+    <#--            <header class="w3-container w3-teal">-->
+    <#--      <span onclick="document.getElementById('id01').style.display='none'"-->
+    <#--            class="w3-button w3-display-topright">&times;</span>-->
+    <#--                <h2>Modal Header</h2>-->
+    <#--            </header>-->
+
+    <#--            <div class="w3-container">-->
+    <#--                <p>Some text..</p>-->
+    <#--                <p>Some text..</p>-->
+    <#--            </div>-->
+
+    <#--            <footer class="w3-container w3-teal">-->
+    <#--                <p>Modal Footer</p>-->
+    <#--            </footer>-->
+
+    <#--        </div>-->
+    <#--    </div>-->
     <!-- Image header -->
     <div class="w3-display-container w3-container">
         <img src="https://img.freepik.com/premium-photo/rustic-vintage-bookstore-filled-with-shelves-old-books-nostalgic-cozy-highquality-realistic_1310094-36304.jpg"
@@ -199,9 +361,10 @@
             <div class="w3-row-padding">
                 <#list books as book>
                     <div class="w3-col l4">
-                        <img src="/images/9" style="width: 200px; height: 300px" alt="">
-                            <p><a href="/lan/1" class="w3-button w3-black w3-padding-large w3-large">MIN SIDA</a></p>
-                            <p><a href="/booking/${book.id}" class="w3-button w3-black w3-padding-large w3-large">LÅNA</a></p>
+                        <img src="/images/1" style="width: 200px; height: 300px" alt="">
+                        <p><a href="/lan" class="w3-button w3-black w3-padding-large w3-large">MIN SIDA</a></p>
+                        <p><a href="/booking/${book.id}" class="w3-button w3-black w3-padding-large w3-large">LÅNA</a>
+                        </p>
                         <p>${book.title}<br> ${book.authorFirstName} <br>${book.authorLastName}
                             <b>${book.description}</b></p>
                     </div>
@@ -215,19 +378,16 @@
 
 </div>
 
+
 <!-- Subscribe section -->
 <div class="w3-container w3-black w3-main">
     <h1 class="w3-center">Hitta sina favoriter</h1>
-        <form onsubmit=""
-              class="w3-flex flex-sm-row flex-column w3-center justify-content-center">
-            <input name="search" onkeyup="myFunction()" id="myInput"
-                   type="search"  style="height: 38px" placeholder="Search for title" aria-label="Search"><button type="button" class="w3-button w3-red" style="height: 38px">Search</button>
-            <ul id="myUL">
-                <li><a href="#">Adele</a></li>
-                <li><a href="#">Agnes</a></li>
-            </ul>
-        </form>
-    </div>
+    <form action="/search" method="get" class="w3-flex flex-sm-row flex-column w3-center justify-content-center">
+        <input name="search" id="myInput"
+               type="search" style="height: 38px" placeholder="Search for title" aria-label="Search"/>
+        <input  type="submit" class="w3-button w3-red" style="height: 38px">Search</input>
+    </form>
+</div>
 
 
 <!-- Newsletter Modal -->

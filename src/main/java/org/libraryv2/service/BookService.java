@@ -2,8 +2,10 @@ package org.libraryv2.service;
 
 import lombok.RequiredArgsConstructor;
 import org.libraryv2.dto.BookDto;
+import org.libraryv2.model.Author;
 import org.libraryv2.model.Book;
 import org.libraryv2.model.Image;
+import org.libraryv2.repository.AuthorRepository;
 import org.libraryv2.repository.BookRepository;
 import org.libraryv2.transformer.TransformerBookDtoToBook;
 import org.libraryv2.transformer.TrasformerBookToBookDto;
@@ -21,10 +23,12 @@ public class BookService {
     private final TransformerBookDtoToBook transformerBookDtoToBook;
     private final TrasformerBookToBookDto trasformerBookToBookDto;
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
 
     public void save(Book book) {
         repository.save(book);
     }
+
 
     public List<Book> findAll() {
         return repository.findAll();
@@ -63,4 +67,19 @@ public class BookService {
       return  bookRepository.findAllByCategoryId(categoryId).stream().map(trasformerBookToBookDto::transform).toList();
     }
 
+    public List<BookDto> search(String search) {
+        List<Book> bookList = new ArrayList<>();
+        List<Author> authors = authorRepository.findByLastNameOrFirstName(search,search);
+        for (Author author : authors) {
+            List<Book> listBooks = bookRepository.findAll().stream().filter(book -> book.getAuthor().contains(author)).toList();
+            for (Book book : listBooks) {
+                bookList.add(book);
+            }
+        }
+        List<Book> books = bookRepository.findAll().stream().filter(book -> book.getTitle().equals(search)).toList();
+        for (Book book : books) {
+            bookList.add(book);
+        }
+      return  bookList.stream().map(trasformerBookToBookDto::transform).toList();
+    }
 }

@@ -29,7 +29,7 @@ public class LibraryController {
     private final UserBookRepository userBookRepository;
 
     @GetMapping("/")
-    public String allBooks(Model model, Long id) {
+    public String allBooks(Model model, Long id,Principal principal) {
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("authors", authorService.getAllAuthors());
 //        model.addAttribute("books",bookService.findAll());
@@ -54,13 +54,25 @@ public class LibraryController {
     }
 
     @GetMapping("/lan/{userId}")
-    public String user(@PathVariable Long userId, Model model) {
+    public String user1(@PathVariable Long userId, Model model) {
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("info", userBooksService.findByUserId(userId));
+        return "user";
+    }
+    @GetMapping("/lan")
+    public String user(Model model,Principal principal) {
+        User userDetails = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        Long userId = userDetails.getId();
+        model.addAttribute("user", userDetails);
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("info", userBooksService.findByUserId(userId));
         return "user";
     }
     @GetMapping("/return_book/{userId}/{bookId}")
-    public String returnBook(@PathVariable Long userId, @PathVariable Long bookId, Model model) {
+    public String returnBook(@PathVariable Long userId, @PathVariable Long bookId, Model model,Principal principal) {
+        User userDetails = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        model.addAttribute("user", userDetails);
+        userBooksService.addNewUserBook(userId,bookId);
         userBooksService.returnBook(userId,bookId);
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("info", userBooksService.findByUserId(userId));
@@ -71,6 +83,7 @@ public class LibraryController {
         User userDetails = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
         Long userId = userDetails.getId();
         userBooksService.addNewUserBook(userId,bookId);
+        model.addAttribute("user", userDetails);
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("info", userBooksService.findByUserId(userId));
         return "user";
@@ -80,15 +93,8 @@ public class LibraryController {
     public String lan(@PathVariable Long bookId, @PathVariable Long userId, Model model, Long categoryId) {
         userBooksService.updateDateOfReturn(bookId);
         model.addAttribute("categories", categoryService.findAll());
-//        model.addAttribute("authors", authorService.getAllAuthors());
-//        model.addAttribute("books", bookService.findAllDto());
         model.addAttribute("info", userBooksService.findByUserId(userId));
-//        model.addAttribute("user", userBookRepository.findById(userId));
-//        model.addAttribute("books", bookService.findAllDtoByCategoryId(categoryId));
-//        model.addAttribute("changesdatebook", userBooksService.updateDateOfReturn(bookId));
-//        model.addAttribute("users", userBookRepository.findAll());
-//        model.addAttribute("images", imageRepository.findAll());
-//        model.addAttribute("size", bookService.findAllDto().size());
+//
 
         return "user";
     }
@@ -96,19 +102,18 @@ public class LibraryController {
     @GetMapping("/add/{userId}/{bookId}")
     public String add(@PathVariable Long userId, @PathVariable Long bookId, Model model, Long categoryId) {
         model.addAttribute("categories", categoryService.findAll());
-//        model.addAttribute("authors", authorService.getAllAuthors());
-//        model.addAttribute("books", bookService.findAllDto());
-//        model.addAttribute("books", bookService.findAllDtoByCategoryId(categoryId));
         model.addAttribute("info", userBooksService.findByUserId(userId));
-//        model.addAttribute("user", userBookRepository.findById(userId));
-//        model.addAttribute("books", bookService.findAllDto());
-//        model.addAttribute("size", bookService.findAllDto().size());
-//        model.addAttribute("changesdatebook", userBooksService.updateDateOfReturn(bookId));
-//        model.addAttribute("users", userBookRepository.findAll());
-//        model.addAttribute("images", imageRepository.findAll());
-//         model.addAttribute("newuserbook",userBooksService.addNewUserBook(userId,bookId));
 
         return "user";
+    }
+    @GetMapping("/logout")
+    public String logout( Model model) {
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("authors", authorService.getAllAuthors());
+        model.addAttribute("books", bookService.findAllDto());
+        model.addAttribute("size", bookService.findAllDto().size());
+
+        return "main";
     }
 
 

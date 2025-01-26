@@ -53,6 +53,22 @@
             outline: 0 !important;
         }
 
+        .card {
+            /* Add shadows to create the "card" effect */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Add some padding inside the card container */
+        .container {
+            padding: 2px 16px;
+        }
+
         #myUL {
             /* Remove default list styling */
             list-style-type: none;
@@ -136,13 +152,14 @@
 <body class="w3-content" style="max-width:1200px">
 
 <!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:1;width:250px;height: 900px"
+     id="mySidebar">
     <div class="w3-container w3-display-container w3-padding-16">
         <i onclick="" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
         <h3 class="w3-wide"><b>Biblio</b></h3>
     </div>
 
-    <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <div class="w3-padding-15 w3-large w3-text-grey" style="font-weight:bold">
         <a href="/" class="w3-bar-item w3-button">Books</a>
         <a onclick="" href="" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
             Media <i class="fa fa-caret-down"></i>
@@ -175,7 +192,8 @@
     <!-- Top header -->
     <header class="w3-container w3-xlarge">
         <p class="w3-left">Books</p>
-        <a href="/login" class="fa fa-user w3-right w3-padding-large"></a>
+        <a href="/logout" class=" w3-right w3-padding-large">Logout</a>
+        <a href="" class="w3-right w3-padding-large">${user.getFirstName()} ${user.getLastName()}</a>
     </header>
 
     <!-- Image header -->
@@ -190,49 +208,52 @@
         </div>
     </div>
 
-    <#--    <div class="w3-container w3-text-grey" id="jeans">-->
-    <#--        <p>${size} items </p>-->
-    <#--    </div>-->
-
-    <!-- Product grid -->
-
-    <#--    <div class="w3-row-padding">-->
-    <#--        <div class="w3-col l12 s12">-->
-    <#--            <div class="w3-row-padding">-->
-    <#--                <#list books as book>-->
-    <#--                    <div class="w3-col l4">-->
-    <#--                        <img src="/images/9" style="width: 200px; height: 300px" alt="">-->
-    <#--                        <p><a href="/lan/${user.get().getId()}" class="w3-button w3-black w3-padding-large w3-large">LÅNA</a></p>-->
-    <#--                        <p>${book.title}<br> ${book.authorFirstName} <br>${book.authorLastName}-->
-    <#--                            <b>${book.description}</b></p>-->
-    <#--                    </div>-->
-    <#--                </#list>-->
-    <#--            </div>-->
-    <#--        </div>-->
-
-
-    <#--    </div>-->
-
 
 </div>
-
+<div class="w3-container w3-text-grey" id="jeans">
+    <br>
+</div>
 <!-- Subscribe section -->
-<div class="w3-container w3-black w3-main">
+<div class="w3-container w3-black w3-main w3-right" style="width: 930px">
     <h1 class="w3-center">Min sida</h1>
-    <p class="w3-center">Min lan</p>
-    <#list info as info>
-        <p class="w3-center">${info.id}.</p>
-        <p class="w3-center"> ${info.bookTitle} </p>
-        <p class="w3-center"> från ${info.dateOfLoan}
-            <a href="/lan/${info.user}/${info.bookId}" type="button" class=" w3-center w3-button w3-red" style="height: 38px">LÅNA OM</a>
-        </p>
-        <p class="w3-center"> till ${info.dateOfReturn}
-            <a href="/return_book/${info.user}/${info.id}" type="button" class=" w3-center w3-button w3-red" style="height: 38px"> LÄMNA TILLBAKA</a>  </p>
-        <p class="w3-center">
-            <#if info.returned> returned <#else> not returned </#if>
-        </p>
 
-    </#list>
+      <div class="card w3-margin">
+          <div class="w3-row">
+              <div class=" w3-col l6"> <img src="/images/1" alt="Avatar" style="width:40%"> </div>
+              <div class=" w3-col l6">
+                  <div class="row">
+                      <div class=" w3-col l6">
+                          <h4>${user.firstName}</h4>
+                          <p><h4>${user.lastName}</h4></p>
+                          <p><h4>${user.login}</h4></p>
+                      </div>
+                      <div class=" w3-col l6">
+                          <a href="/change_my_profile" type="button" class="  w3-button w3-yellow w3-right w3-margin-top"
+                             style="height: 38px"> BYT FIRSTNAME</a>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+          <div class="container">
+        <p>
+            <p class="">Min lån historik</p>
+            <#list info as info>
+
+                ${info.id}.<h4>${info.bookTitle}</h4> från ${info.dateOfLoan} till ${info.dateOfReturn}
+                <p>
+                    <a href="/lan/${info.user}/${info.bookId}" type="button" class="  w3-button w3-red w3-right w3-margin-left"
+                       style="height: 38px">LÅNA OM</a>
+                    <a href="/return_book/${info.user}/${info.id}" type="button" class="  w3-button w3-red w3-right w3-margin-left"
+                       style="height: 38px"> LÄMNA TILLBAKA</a>
+                </p>
+                <p>Status <#if info.returned> returned <#else> not returned </#if></p>
+            </#list>
+        </p>
+        </div>
+    </div>
+    <div class="card">
+    </div>
 </div>
 
 

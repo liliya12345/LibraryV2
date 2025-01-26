@@ -1,12 +1,6 @@
 package org.libraryv2.dto;
 
 import lombok.Data;
-import org.libraryv2.model.Book;
-import org.libraryv2.model.User;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Data

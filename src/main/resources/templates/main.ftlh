@@ -290,55 +290,7 @@
         <a href="/login" class="fa fa-user w3-right w3-padding-large"></a>
 
     </header>
-    <#--//Login form-->
-<#--    <div class=" w3-modal"   id="id01">-->
-<#--&lt;#&ndash;        <div class="w3-modal-content">&ndash;&gt;-->
-<#--            <div class="wrapper">-->
-<#--                <div class="title"><span>Login Form</span></div>-->
-<#--                <span onclick="document.getElementById('id01').style.display='none'"-->
-<#--                      class="w3-button w3-display-topright">&times;</span>-->
-<#--                <form action="/login" method="post">-->
-<#--                    <div class="row">-->
-<#--                        <span onclick="document.getElementById('id01').style.display='none'"-->
-<#--                              class="w3-button w3-display-topright">&times;</span>-->
-<#--                        <i class="fas fa-user"></i>-->
-<#--                        <input type="text" placeholder="name" name="username" required/>-->
-<#--                    </div>-->
-<#--                    <div class="row">-->
-<#--                        <i class="fas fa-lock"></i>-->
-<#--                        <input type="password" placeholder="password" name="password" required/>-->
-<#--                    </div>-->
-<#--                    <div class="pass"><a href="#">Forgot password?</a></div>-->
-<#--                    <div class="row button">-->
-<#--                        <input type="submit" value="Login"/>-->
-<#--                    </div>-->
-<#--                    <div class="signup-link">Not a member? <a href="/registration">Signup now</a></div>-->
-<#--                </form>-->
-<#--&lt;#&ndash;            </div>&ndash;&gt;-->
 
-<#--            </div>-->
-<#--    </div>-->
-    <#--    <div id="id01" class="w3-modal">-->
-    <#--        <div class="w3-modal-content">-->
-
-    <#--            <header class="w3-container w3-teal">-->
-    <#--      <span onclick="document.getElementById('id01').style.display='none'"-->
-    <#--            class="w3-button w3-display-topright">&times;</span>-->
-    <#--                <h2>Modal Header</h2>-->
-    <#--            </header>-->
-
-    <#--            <div class="w3-container">-->
-    <#--                <p>Some text..</p>-->
-    <#--                <p>Some text..</p>-->
-    <#--            </div>-->
-
-    <#--            <footer class="w3-container w3-teal">-->
-    <#--                <p>Modal Footer</p>-->
-    <#--            </footer>-->
-
-    <#--        </div>-->
-    <#--    </div>-->
-    <!-- Image header -->
     <div class="w3-display-container w3-container">
         <img src="https://img.freepik.com/premium-photo/rustic-vintage-bookstore-filled-with-shelves-old-books-nostalgic-cozy-highquality-realistic_1310094-36304.jpg"
              alt="library" style="width:100%">
@@ -354,15 +306,45 @@
         <p>${size} items </p>
     </div>
 
+    <!-- Search-->
+    <div class="w3-container w3-white w3-main">
+        <h1 class="w3-center">Hitta sina favoriter</h1>
+        <form action="/search" method="get" class="w3-flex flex-sm-row flex-column w3-center justify-content-center w3-margin">
+            <input name="search" id="myInput"
+                   type="search" style="height: 38px" size="70"  placeholder="Search for title or author" aria-label="Search"/>
+            <button  onclick=hide() type="submit" class="w3-button w3-red" style="height: 38px">Search</button>
+        </form>
+    </div>
     <!-- Product grid -->
-
-    <div class="w3-row-padding">
+<div id="catalog">
+    <div class="w3-row-margin" id="catalog">
         <div class="w3-col l12 s12">
             <div class="w3-row-padding">
                 <#list books as book>
                     <div class="w3-col l4">
                         <img src="/images/1" style="width: 200px; height: 300px" alt="">
-                        <p><a href="/lan" class="w3-button w3-black w3-padding-large w3-large">MIN SIDA</a></p>
+                        <#--                        <p><a href="/lan" class="w3-button w3-black w3-padding-large w3-large">MIN SIDA</a></p>-->
+                        <p><a href="/booking/${book.id}" class="w3-button w3-black w3-padding-large w3-large">LÅNA</a>
+                        </p>
+                        <p>${book.title}<br> ${book.authorFirstName} <br>${book.authorLastName}
+                            <b>${book.description}</b></p>
+                    </div>
+                </#list>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+    <div class="w3-row-margin">
+        <div class="w3-col l12 s12">
+            <div class="w3-row-padding">
+                <#list booklist as book>
+                    <div class="w3-col l4">
+                        <img src="/images/1" style="width: 200px; height: 300px" alt="">
+                        <#--                        <p><a href="/lan" class="w3-button w3-black w3-padding-large w3-large">MIN SIDA</a></p>-->
                         <p><a href="/booking/${book.id}" class="w3-button w3-black w3-padding-large w3-large">LÅNA</a>
                         </p>
                         <p>${book.title}<br> ${book.authorFirstName} <br>${book.authorLastName}
@@ -376,38 +358,35 @@
     </div>
 
 
+
 </div>
 
 
 <!-- Subscribe section -->
-<div class="w3-container w3-black w3-main">
-    <h1 class="w3-center">Hitta sina favoriter</h1>
-    <form action="/search" method="get" class="w3-flex flex-sm-row flex-column w3-center justify-content-center">
-        <input name="search" id="myInput"
-               type="search" style="height: 38px" placeholder="Search for title" aria-label="Search"/>
-        <input  type="submit" class="w3-button w3-red" style="height: 38px">Search</input>
-    </form>
-</div>
+
 
 
 <!-- Newsletter Modal -->
-<div id="newsletter" class="w3-modal">
-    <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
-        <div class="w3-container w3-white w3-center">
+<#--<div id="newsletter" class="w3-modal">-->
+<#--    <div class="w3-modal-content w3-animate-zoom" style="padding:32px">-->
+<#--        <div class="w3-container w3-white w3-center">-->
 
-            class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
-            <h2 class="w3-wide">NEWSLETTER</h2>
-            <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-            <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom">
-                Subscribe
-            </button>
-        </div>
-    </div>
-</div>
+<#--            class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>-->
+<#--            <h2 class="w3-wide">NEWSLETTER</h2>-->
+<#--            <p>Join our mailing list to receive updates on new arrivals and special offers.</p>-->
+<#--            <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>-->
+<#--            <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom">-->
+<#--                Subscribe-->
+<#--            </button>-->
+<#--        </div>-->
+<#--    </div>-->
+<#--</div>-->
 </body>
 </html>
 <script>
+     function hide () {
+         document.getElementById("catalog").style.display="none"
+    }
     function myFunction() {
         // Declare variables
         var input, filter, ul, li, a, i, txtValue;

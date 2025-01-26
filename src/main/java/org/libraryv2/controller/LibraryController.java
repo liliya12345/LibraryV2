@@ -29,12 +29,10 @@ public class LibraryController {
     private final UserBookRepository userBookRepository;
 
     @GetMapping("/")
-    public String allBooks(Model model, Long id,Principal principal) {
+    public String allBooks(Model model, Long id,Principal principal,String search) {
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("authors", authorService.getAllAuthors());
-//        model.addAttribute("books",bookService.findAll());
         model.addAttribute("books", bookService.findAllDto());
-//        model.addAttribute("images",imageRepository.findAll());
         model.addAttribute("size", bookService.findAllDto().size());
         return "main";
     }
@@ -43,13 +41,9 @@ public class LibraryController {
     public String hello(@PathVariable Long categoryId, Long userId, Model model) {
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("authors", authorService.getAllAuthors());
-//        model.addAttribute("books",bookService.findAll());
         model.addAttribute("info", userBooksService.findByUserId(userId));
-//        model.addAttribute("user",userBookRepository.findById(userId));
         model.addAttribute("books", bookService.findAllDtoByCategoryId(categoryId));
-//        model.addAttribute("images",imageRepository.findAll());
         model.addAttribute("size", bookService.findAllDto().size());
-//        model.addAttribute("userbook", userBookRepository.findByUserId(userId));
         return "main";
     }
 

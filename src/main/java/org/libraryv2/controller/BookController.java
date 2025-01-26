@@ -18,12 +18,19 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final CategoryService categoryService;
+    private final AuthorService authorService;
 
     @GetMapping("/search")
     public String search(String search,Model model) {
       List<BookDto> bookDtoList= bookService.search(search);
 
+        model.addAttribute("booklist", bookService.search(search));
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("authors", authorService.getAllAuthors());
+        model.addAttribute("books", bookService.findAllDto());
+        model.addAttribute("size", bookService.findAllDto().size());
 
-        return "user";
+        return "search";
     }
 }
